@@ -1,6 +1,6 @@
 const fetchChoice = async () => {
-  const res = await fetch('/api/test');
-  const data = await res.json();
+  const res = await fetch('http://localhost:8080/api/test');
+  const data = await res;
   return data;
 };
 
@@ -9,7 +9,7 @@ export default async function Home() {
   console.log(choice);
   return (
     <div>
-      api test
+      {choice}
       {/* <div className="flex flex-col justify-center items-start gap-4">
         <ProgressBar progress="50" />
         <ChoiceLayout title1="오늘 뭐 먹지?" title2="오늘 뭐 먹지?">
