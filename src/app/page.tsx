@@ -1,6 +1,7 @@
 const fetchChoice = async () => {
-  const res = await fetch('http://localhost:8080/api/test');
-  const data = await res;
+  const res = await fetch('http://172.30.1.34:8080/api/test');
+  console.log(res);
+  const data = await res.text();
   return data;
 };
 
