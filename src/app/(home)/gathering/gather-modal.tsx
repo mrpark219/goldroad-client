@@ -39,7 +39,10 @@ const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
         </div>
         <p className="text-[#666666] font-medium text-[18px] mb-[24px]">{meeting.summary}</p>
         <div className="flex justify-between w-full items-center">
-          <div className="flex items-center gap-[12px]">
+          <button
+            className="flex items-center gap-[12px]"
+            onClick={() => router.push('/gathering/feedback')}
+          >
             <div className="avatar-group -space-x-2 rtl:space-x-reverse">
               <div className="avatar">
                 <div className="w-6">
@@ -70,7 +73,7 @@ const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
             <p className="text-[#666666] text-[14px]">
               <b className="font-semibold text-[18px]">8</b> /12
             </p>
-          </div>
+          </button>
         </div>
       </div>
       <div className="w-full flex items-center justify-center">
