@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import Icon from '../../../../public/icons/icon';
+import Icon from '../../../../../../public/icons/icon';
 interface BisectionCardProps {
   iconName: string;
   text: string;
