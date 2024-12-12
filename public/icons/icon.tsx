@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useRef } from 'react';
 
 const replaceColor = (svgString: string, newColor: string) => {

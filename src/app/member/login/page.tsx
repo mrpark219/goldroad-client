@@ -2,7 +2,6 @@
 import DefaultButton from '@/app/components/buttons/default-button';
 import Input from '@/app/components/Input';
 import Link from 'next/link';
-import React from 'react';
 
 const LoginPage = () => {
   return (
