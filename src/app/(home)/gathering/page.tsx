@@ -71,7 +71,7 @@ const GatheringPage = () => {
       <div className="mx-[24px]">
         <p className="text-[24px] mt-[38px] mb-[24px] font-bold">00님만을 위한 모임이에요!</p>
         <div className="flex flex-col gap-[18px] mb-[58px]">
-          {meetings.map((data) => (
+          {meetings?.map((data) => (
             <div
               key={data.id}
               className="border-[1px] border-solid border-[#C4C4C6] rounded-[8px] p-[20px] flex-col flex gap-[40px] cursor-pointer"

@@ -41,6 +41,7 @@ function GatherSwiper() {
       setMeetings(data);
     });
   }, []);
+  if (!meetings) return;
   return (
     <>
       <Link
