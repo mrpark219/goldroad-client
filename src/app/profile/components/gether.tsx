@@ -1,4 +1,4 @@
-import { getMeetings, MeetingData } from '@/app/(home)/components/gather-swiper';
+import { MeetingData } from '@/app/(home)/components/gather-swiper';
 import GatherModal from '@/app/(home)/gathering/gather-modal';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -20,6 +20,24 @@ function Gether() {
   const [meetingId, setMeetingId] = useState(0);
   const handleModalClose = () => {
     setIsModalOpen(false);
+  };
+
+  const getMeetings = async () => {
+    try {
+      if (typeof window === 'undefined') return;
+      const token = localStorage.getItem('refreshToken');
+      console.log(token, 'token');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meeting`, {
+        method: 'GET',
+        headers: { 'refresh-token': `${token}`, 'access-token': `${token}` },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {

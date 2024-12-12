@@ -8,11 +8,16 @@ import { useEffect, useState } from 'react';
 import Icon from '../../../../../public/icons/icon';
 
 const HomeProfile = () => {
-  const token = localStorage.getItem('refreshToken');
   const router = useRouter();
   const [memberInfo, setMemberInfo] = useState<UserData | null>(null);
   const getMemberInfo = async () => {
     try {
+      if (typeof window === 'undefined') return;
+      const token = localStorage.getItem('refreshToken');
+      if (!token) {
+        router.push('/member/login');
+        return null;
+      }
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member`, {
         method: 'GET',
         headers: {
@@ -32,10 +37,7 @@ const HomeProfile = () => {
       setMemberInfo(data);
     });
   }, []);
-  if (!token) {
-    router.push('/member/login');
-    return null;
-  }
+
   return (
     <div className="mx-[24px] p-[28px] bg-[#FFF3EC] rounded-[16px] mt-[40px] mb-[58px] flex gap-[12px] items-center cursor-pointer">
       <Link href="/profile">

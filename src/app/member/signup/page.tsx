@@ -46,7 +46,7 @@ const SignUpPage = () => {
         });
         if (response.ok) {
           const data = await response.json();
-
+          if (typeof window === 'undefined') return;
           localStorage.setItem('refreshToken', data['refreshToken']);
           localStorage.setItem('accessToken', data['accessToken']);
 

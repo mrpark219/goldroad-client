@@ -36,7 +36,7 @@ const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
           </p>
         </div>
         <Link
-          href={'https://us04web.zoom.us/j/74892608653?pwd=ysKFbaLYkrfad3lAgAqVU49yd55byP.1'}
+          href={'https://us04web.zoom.us/j/72829361511?pwd=c2V5blPBMS1xxarL8ZUZbLEErOoDaK.1'}
           className="flex items-center gap-[8px]"
           target="_blank"
         >

@@ -15,6 +15,7 @@ function ProfilePage() {
 
   const getMemberInfo = async () => {
     try {
+      if (typeof window === 'undefined') return;
       const token = localStorage.getItem('refreshToken');
       console.log(token);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member`, {

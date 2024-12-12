@@ -17,8 +17,9 @@ export type MeetingData = {
   title: string;
 };
 
-export const getMeetings = async () => {
+const getMeetings = async () => {
   try {
+    if (typeof window === 'undefined') return;
     const token = localStorage.getItem('refreshToken');
     console.log(token, 'token');
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meeting`, {

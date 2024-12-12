@@ -2,7 +2,7 @@
 import { UserData } from '@/app/member/signup/page';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getMeetings, MeetingData } from '../components/gather-swiper';
+import { MeetingData } from '../components/gather-swiper';
 import GatherModal from './gather-modal';
 
 const iconsList = [
@@ -46,9 +46,27 @@ const GatheringPage = () => {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+  const getMeetings = async () => {
+    try {
+      if (typeof window === 'undefined') return;
+      const token = localStorage.getItem('refreshToken');
+      console.log(token, 'token');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meeting`, {
+        method: 'GET',
+        headers: { 'refresh-token': `${token}`, 'access-token': `${token}` },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const getMemberInfo = async () => {
     try {
+      if (typeof window === 'undefined') return;
       const token = localStorage.getItem('refreshToken');
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member`, {
