@@ -1,45 +1,57 @@
-'use client';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import HomeGettering from '../components/Home/HomeGettering';
-import HomeNews from '../components/Home/HomeNews';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
 import HomeProfile from '../components/Home/HomeProfile';
 
 import 'swiper/css';
+import GatherSwiper from './components/gather-swiper';
+import NewsSwiper from './components/news-swiper';
 
-const HomePage = () => {
+const getHtml = async () => {
+  const response = await axios.get(
+    'https://www.newsjeju.net/news/articleList.html?sc_area=A&view_type=sm&sc_word=%EA%B7%80%EC%B4%8C',
+    {
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+      },
+    },
+  );
+  const html = response.data;
+  const $ = cheerio.load(html);
+
+  const titles: string[] = [];
+  $('#section-list .titles')
+    .slice(0, 5)
+    .each((index, element) => {
+      titles.push($(element).text());
+    });
+  const images: string[] = [];
+  $('#section-list img')
+    .slice(0, 5)
+    .each((index, element) => {
+      images.push($(element).attr('src') || '');
+    });
+
+  const link: string[] = [];
+  $('#section-list a')
+    .slice(0, 5)
+    .each((index, element) => {
+      link.push($(element).attr('href') || '');
+    });
+
+  return { titles, images, link };
+};
+
+const HomePage = async () => {
+  const { titles, images, link } = await getHtml();
+
   return (
     <div>
+      home
       <HomeProfile />
-      <p className="font-bold text-[24px] mx-[24px] text-black mb-[24px]">뉴스레터</p>
-      <Swiper spaceBetween={18} slidesPerView={1.5} className="!ml-[24px] mb-[58px]">
-        <SwiperSlide>
-          <HomeNews />
-        </SwiperSlide>
-        <SwiperSlide>
-          <HomeNews />
-        </SwiperSlide>
-        <SwiperSlide>
-          <HomeNews />
-        </SwiperSlide>
-        <SwiperSlide>
-          <HomeNews />
-        </SwiperSlide>
-      </Swiper>
-      <p className="font-bold text-[24px] mx-[24px] text-black mb-[24px]">모임</p>
-      <Swiper spaceBetween={18} slidesPerView={1.1} className="!ml-[24px] mb-[240px]">
-        <SwiperSlide>
-          <HomeGettering />
-        </SwiperSlide>
-        <SwiperSlide>
-          <HomeGettering />
-        </SwiperSlide>
-        <SwiperSlide>
-          <HomeGettering />
-        </SwiperSlide>
-        <SwiperSlide>
-          <HomeGettering />
-        </SwiperSlide>
-      </Swiper>
+      <NewsSwiper titles={titles} images={images} link={link} />
+      <GatherSwiper />
     </div>
   );
 };
