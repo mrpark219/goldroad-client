@@ -16,6 +16,13 @@ const config: Config = {
         black: '#111111',
         white: '#EEEEEE',
         gray: '#F8F9FB',
+        'light-gray': '#E9EBED',
+        text: {
+          '01': '#111111',
+          '02': '#404040',
+          '03': '#666666',
+          disabled: '#ACACAC',
+        },
       },
     },
   },
