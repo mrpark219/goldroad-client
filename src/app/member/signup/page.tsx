@@ -1,19 +1,20 @@
 'use client';
-import DefaultButton from '@/app/components/buttons/default-button';
-import Input from '@/app/components/Input';
-import React from 'react';
+import { useState } from 'react';
+import Signup from './_survey/survey-section/sighup';
+import SurveySection from './_survey/survey-section/survey-section';
 
 const SignUpPage = () => {
+  const [page, setPage] = useState<number>(0);
+
+  const handleNext = () => {
+    if (page === 6) return;
+    setPage(page + 1);
+  };
   return (
     <div className="px-[24px]">
-      <div className="flex flex-col gap-[60px] mt-[60px]">
-        <Input label="이메일" />
-        <Input label="비밀번호" />
-        <Input label="비밀번호확인" />
-      </div>
-      <div className="fixed bottom-[54px] desktop:w-[432px] w-[calc(100%-48px)]">
-        <DefaultButton text="시작하기" onClick={() => console.log('a')} />
-      </div>
+      <button onClick={() => page > 0 && setPage(page - 1)}>{'<<'}</button>
+      {page === 0 && <Signup handleNext={handleNext} />}
+      {page >= 1 && <SurveySection page={page} handleNext={handleNext} />}
     </div>
   );
 };

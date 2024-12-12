@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import React from 'react';
 // import Header from './components/header';
+import Header from './components/header';
 import './globals.css';
 import ReactQueryProvider from './providers/ReactQueryProvider';
 
@@ -35,11 +36,13 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} font-pretendard antialiased w-full flex flex-col justify-center items-center`}
+        className={`${pretendard.variable} font-pretendard antialiased w-full flex flex-col items-center`}
       >
         <ReactQueryProvider>
-          {/* <Header /> */}
-          {children}
+          <div className="h-full">
+            <Header />
+            {children}
+          </div>
         </ReactQueryProvider>
       </body>
     </html>
