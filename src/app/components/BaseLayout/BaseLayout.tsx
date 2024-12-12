@@ -7,7 +7,7 @@ type Props = {
 
 function BasicLayout({ children }: Props) {
   return (
-    <div className="w-full desktop:w-[480px] min-h-dvh px-[24px]">
+    <div className="w-full desktop:w-[480px] min-h-dvh">
       <main>{children}</main>
     </div>
   );

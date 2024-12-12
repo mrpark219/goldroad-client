@@ -5,7 +5,7 @@ import React from 'react';
 
 const SignUpPage = () => {
   return (
-    <div>
+    <div className="px-[24px]">
       <div className="flex flex-col gap-[60px] mt-[60px]">
         <Input label="이메일" />
         <Input label="비밀번호" />
