@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   keywords:
     '제주도 이주, 은퇴 후 제주, 제주 정착, 제주 부동산, 제주 관광, 제주 귀농, 제주 커뮤니티, 황금향, 제주 생활 정보', // 키워드 추가
   icons: {
-    icon: '/favicon.ico', // Favicon 경로 설정
+    icon: '/icon.ico', // Favicon 경로 설정
   },
   openGraph: {
     title: '황금향',
