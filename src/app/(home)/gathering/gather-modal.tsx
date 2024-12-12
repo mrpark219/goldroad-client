@@ -11,6 +11,7 @@ interface GatherModalProps {
 const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
   const router = useRouter();
   if (!meeting) return;
+
   return (
     <>
       <div className="mx-[24px]">
