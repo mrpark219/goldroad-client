@@ -1,9 +1,7 @@
 'use client';
 
 import HomeNews from '@/app/components/Home/HomeNews';
-import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Icon from '../../../../public/icons/icon';
 function NewsSwiper({
   titles,
   images,
@@ -15,13 +13,7 @@ function NewsSwiper({
 }) {
   return (
     <>
-      <Link
-        href={'/news'}
-        className="font-bold text-[24px] mx-[24px] text-black mb-[24px] flex items-center gap-1"
-      >
-        <p>뉴스레터</p>
-        <Icon name="arrow-right" width={24} height={24} />
-      </Link>
+      <h1 className="font-bold text-[24px] mx-[24px] text-black mb-[24px]">뉴스레터</h1>
       <Swiper spaceBetween={18} slidesPerView={1.5} className="!ml-[24px] mb-[58px]">
         {titles.map((title, index) => (
           <SwiperSlide key={index}>

@@ -7,9 +7,9 @@ import 'swiper/css';
 import GatherSwiper from './components/gather-swiper';
 import NewsSwiper from './components/news-swiper';
 
-const getHtml = async () => {
+export const getHtml = async (type: '귀농' | '부동산' | '관광') => {
   const response = await axios.get(
-    'https://www.newsjeju.net/news/articleList.html?sc_area=A&view_type=sm&sc_word=%EA%B7%80%EC%B4%8C',
+    `https://www.newsjeju.net/news/articleList.html?sc_area=A&view_type=sm&sc_word=${type === '귀농' ? '귀촌' : type}`,
     {
       headers: {
         'User-Agent':
@@ -40,15 +40,22 @@ const getHtml = async () => {
       link.push($(element).attr('href') || '');
     });
 
-  return { titles, images, link };
+  const details: string[] = [];
+  $('#section-list .lead a')
+    .slice(0, 5)
+    .each((index, element) => {
+      details.push($(element).text().split('\n')[1].replaceAll('\t', '').trim().split('.')[0]);
+    });
+  console.log(details);
+
+  return { titles, images, link, details };
 };
 
 const HomePage = async () => {
-  const { titles, images, link } = await getHtml();
+  const { titles, images, link } = await getHtml('귀농');
 
   return (
     <div>
-      home
       <HomeProfile />
       <NewsSwiper titles={titles} images={images} link={link} />
       <GatherSwiper />
