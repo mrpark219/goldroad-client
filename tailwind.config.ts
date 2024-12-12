@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+      },
+      screens: {
+        desktop: '480px',
+      },
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
