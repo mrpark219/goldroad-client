@@ -33,6 +33,23 @@ const config: Config = {
       },
     },
   },
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          primary: '#F6843E',
+          secondary: '#DFB955',
+          accent: '#607d8b',
+          neutral: '#2a2e37',
+          'base-100': '#ffffff',
+          info: '#2196f3',
+          success: '#4caf50',
+          warning: '#fb8c00',
+          error: '#f44336',
+        },
+      },
+    ],
+  },
   plugins: [daisyui],
 };
 export default config;

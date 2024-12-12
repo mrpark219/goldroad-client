@@ -7,6 +7,11 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'cdn.newsjeju.net', port: '', pathname: '/news/thumbnail/**' },
+    ],
+  },
 };
 
 export default nextConfig;

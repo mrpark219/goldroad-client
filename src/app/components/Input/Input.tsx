@@ -1,10 +1,11 @@
+import { UserLoginData } from '@/app/member/login/page';
 import { UserData } from '@/app/member/signup/page';
 import { Dispatch, SetStateAction } from 'react';
 
 type Props = {
   label: string;
   value: string;
-  setValue: Dispatch<SetStateAction<UserData>>;
+  setValue: Dispatch<SetStateAction<UserData | UserLoginData>>;
   type: string;
   errorMessage?: string;
 };
