@@ -20,7 +20,7 @@ export interface UserData {
 }
 
 const SignUpPage = () => {
-  const [isSuccess, setIsSuccess] = useState<boolean>(true);
+  const [isSuccess] = useState<boolean>(true);
   const [page, setPage] = useState<number>(0);
   const [userData, setUserData] = useState<UserData>({
     email: '',
@@ -37,7 +37,7 @@ const SignUpPage = () => {
   const handleNext = async () => {
     if (page === 6) {
       try {
-        const response = await fetch('http://172.30.1.98:8080/api/member/sign-up', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member/sign-up`, {
           method: 'POST',
           body: JSON.stringify(userData),
           headers: { 'Content-Type': 'application/json' },
