@@ -14,7 +14,7 @@ interface Props {
 }
 
 function Signup({ handleNext, userData, setUserData }: Props) {
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   useEffect(() => {
     const { email, password, nickname } = userData;
     if (email && password && nickname) {
