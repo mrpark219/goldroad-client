@@ -10,7 +10,6 @@ interface GatherModalProps {
   meeting: MeetingData;
 }
 const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
-  if (!meeting) return null;
   const router = useRouter();
   if (!meeting) return;
 
@@ -25,7 +24,9 @@ const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
         </p>
         <div className="flex flex-wrap gap-[12px] mb-[18px]">
           {meeting.keyword.split(',').map((keyword) => (
-            <p className="font-semibold text-[#666666] text-[18px]"># {keyword}</p>
+            <p className="font-semibold text-[#666666] text-[18px]" key={keyword}>
+              # {keyword}
+            </p>
           ))}
         </div>
         <div className="flex items-center gap-[8px]">

@@ -1,22 +1,55 @@
 import { MeetingData } from '@/app/(home)/components/gather-swiper';
-import { icons } from '@/app/(home)/gathering/page';
+
 import Image from 'next/image';
 
 interface HomeGetteringProps {
   meeting: MeetingData;
 }
+
+const iconsList = [
+  {
+    id: 1,
+    name: '관광',
+    imagePath: '../../../../icons/gathering1.svg',
+  },
+  {
+    id: 2,
+    name: '귀농',
+    imagePath: '../../../../icons/gathering2.svg',
+  },
+  {
+    id: 3,
+    name: '자연환경',
+    imagePath: '../../../../icons/gathering3.svg',
+  },
+  {
+    id: 4,
+    name: '문화생활',
+    imagePath: '../../../../icons/gathering4.svg',
+  },
+  {
+    id: 5,
+    name: '휴식',
+    imagePath: '../../../../icons/gathering5.svg',
+  },
+  {
+    id: 6,
+    name: '은퇴마을',
+    imagePath: '../../../../icons/gathering6.svg',
+  },
+];
 const HomeGettering = ({ meeting }: HomeGetteringProps) => {
   return (
     <div className="border-[1px] border-solid border-[#C4C4C6] h-[210px] w-[320px] rounded-[16px] p-[10px] flex gap-[12px] cursor-pointer">
       <div className="w-[128px] h-[128px] relative flex-shrink-0">
         <Image
-          src={icons[0].imagePath}
-          alt={icons[0].name}
+          src={iconsList[0].imagePath}
+          alt={iconsList[0].name}
           width={128}
           height={128}
           className="bg-[#EDEDED] rounded-[12px] absolute top-0 left-0"
         />
-        {icons.map((icon) => {
+        {iconsList.map((icon) => {
           const { keyword } = meeting;
           if (keyword && keyword.includes(icon.name)) {
             return (
@@ -40,8 +73,12 @@ const HomeGettering = ({ meeting }: HomeGetteringProps) => {
         <ul className="flex flex-wrap gap-[8px]">
           {meeting.keyword &&
             meeting.keyword.split(',').map((keyword) => {
-              if (!keyword) return <div />;
-              return <li className="font-semibold text-[#666666] text-[18px]"># {keyword}</li>;
+              if (!keyword) return <div key={keyword} />;
+              return (
+                <li key={keyword} className="font-semibold text-[#666666] text-[18px]">
+                  # {keyword}
+                </li>
+              );
             })}
         </ul>
         <div className="flex items-center gap-[12px]">

@@ -1,6 +1,6 @@
 'use client';
 import DefaultButton from '@/app/components/buttons/default-button';
-import Input from '@/app/components/Input/Input';
+import LoginInput from '@/app/components/Input/login-input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -36,13 +36,13 @@ const LoginPage = () => {
     <>
       <div className="mx-[24px] mt-[48px] flex flex-col gap-[48px]">
         <p className="text-[24px] font-bold text-black">안녕하세요!</p>
-        <Input
+        <LoginInput
           label="이메일"
           value={userLoginData.email}
           setValue={setUserLoginData}
           type="email"
         />
-        <Input
+        <LoginInput
           label="비밀번호"
           value={userLoginData.password}
           setValue={setUserLoginData}

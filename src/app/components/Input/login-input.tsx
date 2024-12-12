@@ -1,15 +1,15 @@
-import { UserData } from '@/app/member/signup/page';
+import { UserLoginData } from '@/app/member/login/page';
 import { Dispatch, SetStateAction } from 'react';
 
 type Props = {
   label: string;
   value: string;
-  setValue: Dispatch<SetStateAction<UserData>>;
+  setValue: Dispatch<SetStateAction<UserLoginData>>;
   type: string;
   errorMessage?: string;
 };
 
-const Input = ({ label, errorMessage, value, setValue, type }: Props) => {
+const LoginInput = ({ label, errorMessage, value, setValue, type }: Props) => {
   return (
     <div className="flex flex-col">
       <label className="text-text-disabled font-medium text-[20px]">{label}</label>
@@ -29,4 +29,4 @@ const Input = ({ label, errorMessage, value, setValue, type }: Props) => {
   );
 };
 
-export default Input;
+export default LoginInput;

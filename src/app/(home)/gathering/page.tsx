@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { getMeetings, MeetingData } from '../components/gather-swiper';
 import GatherModal from './gather-modal';
 
-export const icons = [
+const iconsList = [
   {
     id: 1,
     name: '관광',
@@ -50,7 +50,7 @@ const GatheringPage = () => {
   const getMemberInfo = async () => {
     try {
       const token = localStorage.getItem('refreshToken');
-      console.log(token);
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member`, {
         method: 'GET',
         headers: {
@@ -103,13 +103,13 @@ const GatheringPage = () => {
               <div className="flex gap-[12px]">
                 <div className="w-[128px] h-[128px] relative flex-shrink-0">
                   <Image
-                    src={icons[0].imagePath}
-                    alt={icons[0].name}
+                    src={iconsList[0].imagePath}
+                    alt={iconsList[0].name}
                     width={128}
                     height={128}
                     className="bg-[#EDEDED] rounded-[12px] absolute top-0 left-0"
                   />
-                  {icons.map((icon) => {
+                  {iconsList.map((icon) => {
                     const { keyword } = data;
                     if (keyword && keyword.includes(icon.name)) {
                       return (

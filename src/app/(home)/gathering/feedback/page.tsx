@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Icon from '../../../../../public/icons/icon';
 
-const feedbackPage = () => {
+const FeedbackPage = () => {
   const router = useRouter();
   const members = ['승원', '소현', '성환', '수아'];
   return (
@@ -36,4 +36,4 @@ const feedbackPage = () => {
   );
 };
 
-export default feedbackPage;
+export default FeedbackPage;
