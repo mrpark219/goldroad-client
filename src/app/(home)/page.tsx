@@ -46,8 +46,6 @@ export const getHtml = async (type: '귀농' | '부동산' | '관광') => {
     .each((index, element) => {
       details.push($(element).text().split('\n')[1].replaceAll('\t', '').trim().split('.')[0]);
     });
-  console.log(details);
-
   return { titles, images, link, details };
 };
 

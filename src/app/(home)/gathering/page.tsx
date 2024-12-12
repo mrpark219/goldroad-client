@@ -1,8 +1,16 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
+import { useState } from 'react';
+import GatherModal from './gather-modal';
 
 const GatheringPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+  if (isModalOpen) {
+    return <GatherModal handleModalClose={handleModalClose} />;
+  }
   // datas에 실제 api를 불러오시면 됩니다!
   const datas = [
     {

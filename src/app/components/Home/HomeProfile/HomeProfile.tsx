@@ -1,8 +1,28 @@
+'use client';
+
 import Image from 'next/image';
-import React from 'react';
+import { useEffect } from 'react';
 import Icon from '../../../../../public/icons/icon';
 
 const HomeProfile = () => {
+  const getMemberInfo = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getMemberInfo().then((data) => {
+      console.log(data, 'HomeProfile');
+    });
+  }, []);
   return (
     <div className="mx-[24px] p-[28px] bg-[#FFF3EC] rounded-[16px] mt-[40px] mb-[58px] flex gap-[12px] items-center cursor-pointer">
       <Image
