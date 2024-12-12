@@ -1,7 +1,8 @@
 'use client';
-import Image from 'next/image';
-import Icon from '../../../../public/icons/icon';
 import useToggle from '@/lib/hooks/useToggle';
+import Image from 'next/image';
+import Link from 'next/link';
+import Icon from '../../../../public/icons/icon';
 
 function GoldroadPage() {
   const [isOpenGrade, toggleOpenGrade] = useToggle(true);
@@ -9,10 +10,10 @@ function GoldroadPage() {
   return (
     <div className="mx-[24px]">
       {/* 상단바 */}
-      <div className="flex items-center gap-[14px] cursor-pointer mb-[24px]">
+      <Link href="/" className="flex items-center gap-[14px] cursor-pointer mb-[24px]">
         <Icon name="arrow-back" width={28} height={28} />
         <p className="text-[20px] font-semibold">내 황금향 키우기</p>
-      </div>
+      </Link>
       {/* 이미지 */}
       <div className="w-full h-[296px] relative rounded-[16px] bg-gray mb-[28px] overflow-hidden">
         <Image src="/icons/grade1.svg" alt="황금향이미지" fill objectFit="cover" />

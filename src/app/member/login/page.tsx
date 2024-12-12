@@ -24,6 +24,8 @@ const LoginPage = () => {
         headers: { 'Content-Type': 'application/json' },
       });
       if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('refreshToken', data.refreshToken);
         router.push('/');
       }
     } catch (error) {

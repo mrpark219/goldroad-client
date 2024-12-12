@@ -86,7 +86,7 @@ const GatheringPage = () => {
 
   const onClickDetail = (id: number) => {
     // 모달띄우기
-    console.log(id);
+    setIsModalOpen(true);
   };
 
   return (
