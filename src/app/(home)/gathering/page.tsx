@@ -1,4 +1,5 @@
 'use client';
+import { UserData } from '@/app/member/signup/page';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { getMeetings, MeetingData } from '../components/gather-swiper';
@@ -40,14 +41,37 @@ export const icons = [
 const GatheringPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [meetingId, setMeetingId] = useState(0);
+  const [memberInfo, setMemberInfo] = useState<UserData | null>(null);
   const [meetings, setMeetings] = useState<MeetingData[]>([]);
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
+  const getMemberInfo = async () => {
+    try {
+      const token = localStorage.getItem('refreshToken');
+      console.log(token);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member`, {
+        method: 'GET',
+        headers: {
+          'access-token': token || '',
+          'refresh-token': token || '',
+        },
+      });
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getMeetings().then((data) => {
       setMeetings(data);
+      getMemberInfo().then((data) => {
+        setMemberInfo(data);
+      });
     });
   }, []);
   if (isModalOpen) {
@@ -69,7 +93,7 @@ const GatheringPage = () => {
   return (
     <>
       <div className="mx-[24px]">
-        <p className="text-[24px] mt-[38px] mb-[24px] font-bold">00님만을 위한 모임이에요!</p>
+        <p className="text-[24px] mt-[38px] mb-[24px] font-bold">{`${memberInfo?.nickname}님만을 위한 모임이에요!`}</p>
         <div className="flex flex-col gap-[18px] mb-[58px]">
           {meetings?.map((data) => (
             <div

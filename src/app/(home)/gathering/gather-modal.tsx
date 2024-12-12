@@ -40,7 +40,7 @@ const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
           target="_blank"
         >
           <Icon name={'link'} width={20} height={20} />
-          <p className="text-[#666666] font-medium text-[18px]">link</p>
+          <p className="text-blue-400 font-medium text-[18px] underline ">link</p>
         </Link>
         <p className="text-[#666666] font-medium text-[18px] mb-[24px]">{meeting.summary}</p>
         <div className="flex justify-between w-full items-center">

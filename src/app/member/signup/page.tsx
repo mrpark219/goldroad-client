@@ -47,6 +47,9 @@ const SignUpPage = () => {
         if (response.ok) {
           const data = await response.json();
 
+          localStorage.setItem('refreshToken', data['refreshToken']);
+          localStorage.setItem('accessToken', data['accessToken']);
+
           const res = await fetch(`${data.url}`, {
             method: 'POST',
             body: JSON.stringify({
