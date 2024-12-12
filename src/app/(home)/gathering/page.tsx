@@ -74,8 +74,13 @@ const GatheringPage = () => {
     },
     {
       id: 5,
-      name: '문화생활',
-      imagePath: '../../../../icons/gathering4.svg',
+      name: '휴식',
+      imagePath: '../../../../icons/gathering5.svg',
+    },
+    {
+      id: 6,
+      name: '은퇴마을',
+      imagePath: '../../../../icons/gathering6.svg',
     },
   ];
 

@@ -59,10 +59,6 @@ const GatherModal = ({ handleModalClose }: GatherModalProps) => {
               <b className="font-semibold text-[18px]">8</b> /12
             </p>
           </div>
-          <div className="text-[#666666] flex items-center gap-[8px] cursor-pointer">
-            채팅참여
-            <Icon name="chatting" width={16} height={16} />
-          </div>
         </div>
       </div>
       <div className="w-full flex items-center justify-center">
