@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import ArrowRight from '/public/icons/arrow-right.svg';
+import Icon from '../../../../../public/icons/icon';
 
 const HomeProfile = () => {
   return (
@@ -9,7 +9,7 @@ const HomeProfile = () => {
       <div>
         <p className="font-semibold text-[24px] text-black mb-[4px] mr-[4px]">00님</p>
         <p className="font-semibold text-[20px] text-black flex items-center">
-          내 황금향 <ArrowRight />
+          내 황금향 <Icon name="arrow-right" width={16} height={16} />
         </p>
       </div>
     </div>
