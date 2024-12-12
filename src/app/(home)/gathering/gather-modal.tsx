@@ -1,6 +1,7 @@
 'use client';
 import DefaultButton from '@/app/components/buttons/default-button';
 import ButtonLayout from '@/app/member/signup/components/layout/button-layout';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Icon from '../../../../public/icons/icon';
 import { MeetingData } from '../components/gather-swiper';
@@ -33,10 +34,14 @@ const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
             {meeting.createdDate.split('T')[0]}
           </p>
         </div>
-        <div className="flex items-center gap-[8px]">
+        <Link
+          href={'https://us04web.zoom.us/j/74892608653?pwd=ysKFbaLYkrfad3lAgAqVU49yd55byP.1'}
+          className="flex items-center gap-[8px]"
+          target="_blank"
+        >
           <Icon name={'link'} width={20} height={20} />
           <p className="text-[#666666] font-medium text-[18px]">link</p>
-        </div>
+        </Link>
         <p className="text-[#666666] font-medium text-[18px] mb-[24px]">{meeting.summary}</p>
         <div className="flex justify-between w-full items-center">
           <button
