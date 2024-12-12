@@ -1,5 +1,6 @@
 'use client';
 import DefaultButton from '@/app/components/buttons/default-button';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Icon from '../../../../public/icons/icon';
 import Signup from './_survey/survey-section/sighup';
@@ -20,7 +21,8 @@ export interface UserData {
 }
 
 const SignUpPage = () => {
-  const [isSuccess] = useState<boolean>(false);
+  const router = useRouter();
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
   const [userData, setUserData] = useState<UserData>({
     email: '',
@@ -42,7 +44,43 @@ const SignUpPage = () => {
           body: JSON.stringify(userData),
           headers: { 'Content-Type': 'application/json' },
         });
-        console.log(response.json());
+        if (response.ok) {
+          const data = await response.json();
+
+          const res = await fetch(`${data.url}`, {
+            method: 'POST',
+            body: JSON.stringify({
+              model: data.model,
+              response_format: { type: 'json_object' },
+              temperature: Number(data.temperature),
+              messages: [
+                {
+                  role: 'user',
+                  content: data.prompt,
+                },
+              ],
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${data.gptKey}`,
+            },
+          });
+          const gptData: string = await res.text();
+          await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member/gpt`, {
+            method: 'POST',
+            body: JSON.stringify({
+              result: gptData,
+              interest: data.interest,
+              preferredTime: data.preferredTime,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+              'refresh-token': data.refreshToken,
+              'access-token': data.accessToken,
+            },
+          });
+          setIsSuccess(true);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -64,7 +102,7 @@ const SignUpPage = () => {
           </div>
         </InputLayout>
         <ButtonLayout>
-          <DefaultButton text="확인" onClick={() => console.log('hi')} />
+          <DefaultButton text="확인" onClick={() => router.push('/gathering')} />
         </ButtonLayout>
       </div>
     );

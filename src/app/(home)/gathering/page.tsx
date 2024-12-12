@@ -85,9 +85,10 @@ const GatheringPage = () => {
                     height={128}
                     className="bg-[#EDEDED] rounded-[12px] absolute top-0 left-0"
                   />
-                  {icons.map(
-                    (icon) =>
-                      data.keyword.includes(icon.name) && (
+                  {icons.map((icon) => {
+                    const { keyword } = data;
+                    if (keyword && keyword.includes(icon.name)) {
+                      return (
                         <Image
                           key={icon.name}
                           src={icon.imagePath}
@@ -96,8 +97,9 @@ const GatheringPage = () => {
                           height={128}
                           className="bg-[#EDEDED] rounded-[12px] absolute top-0 left-0"
                         />
-                      ),
-                  )}
+                      );
+                    }
+                  })}
                 </div>
                 <div className="flex flex-col">
                   <p className="w-fit bg-[#D7F0EA] mb-[4px] text-[#0A614D] text-[12px] font-semibold px-[10px] py-[4px] rounded-[16px]">
@@ -105,7 +107,9 @@ const GatheringPage = () => {
                   </p>
                   <p className="font-semibold text-[20px] mb-[8px] text-black">{data.title}</p>
                   <div className="flex flex-wrap gap-[8px] mb-[12px]">
-                    <p className="font-semibold text-[#666666] text-[18px]"># {data.keyword}</p>
+                    {data.keyword && (
+                      <p className="font-semibold text-[#666666] text-[18px]"># {data.keyword}</p>
+                    )}
                   </div>
                   <div className="flex items-center gap-[12px]">
                     <div className="avatar-group -space-x-2 rtl:space-x-reverse">

@@ -16,9 +16,10 @@ const HomeGettering = ({ meeting }: HomeGetteringProps) => {
           height={128}
           className="bg-[#EDEDED] rounded-[12px] absolute top-0 left-0"
         />
-        {icons.map(
-          (icon) =>
-            meeting.keyword.includes(icon.name) && (
+        {icons.map((icon) => {
+          const { keyword } = meeting;
+          if (keyword && keyword.includes(icon.name)) {
+            return (
               <Image
                 key={icon.name}
                 src={icon.imagePath}
@@ -27,8 +28,9 @@ const HomeGettering = ({ meeting }: HomeGetteringProps) => {
                 height={128}
                 className="bg-[#EDEDED] rounded-[12px] absolute top-0 left-0"
               />
-            ),
-        )}
+            );
+          }
+        })}
       </div>
       <div className="flex flex-col justify-between h-full">
         <p className="w-fit bg-[#D7F0EA] text-[#0A614D] text-[12px] font-semibold px-[16px] py-[4px] rounded-[16px]">
@@ -36,10 +38,11 @@ const HomeGettering = ({ meeting }: HomeGetteringProps) => {
         </p>
         <p className="font-semibold text-[18px] mb-[3px] text-black">{meeting.title}</p>
         <ul className="flex flex-wrap gap-[8px]">
-          {meeting.keyword.split(',').map((keyword) => {
-            if (!keyword) return <div />;
-            return <li className="font-semibold text-[#666666] text-[18px]"># {keyword}</li>;
-          })}
+          {meeting.keyword &&
+            meeting.keyword.split(',').map((keyword) => {
+              if (!keyword) return <div />;
+              return <li className="font-semibold text-[#666666] text-[18px]"># {keyword}</li>;
+            })}
         </ul>
         <div className="flex items-center gap-[12px]">
           <div className="avatar-group -space-x-2 rtl:space-x-reverse">
