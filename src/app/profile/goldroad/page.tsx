@@ -2,19 +2,61 @@
 import useToggle from '@/lib/hooks/useToggle';
 import Image from 'next/image';
 import Link from 'next/link';
-import Icon from '../../../../public/icons/icon';
 import { useEffect, useState } from 'react';
+import Icon from '../../../../public/icons/icon';
+
+interface MemberInfo {
+  nickname: string;
+  email: string;
+  password: string;
+  genderType: string;
+  age: string;
+  familyComposition: string;
+  preferredTime: string;
+  preferredPeople: string;
+  interest: string;
+  feedbackWater: number;
+  feedbackSun: number;
+  feedbackManure: number;
+  attendCount: number;
+  levelCount: number;
+}
 
 function GoldroadPage() {
   const [isOpenGrade, toggleOpenGrade] = useToggle(true);
+  const [memberInfo, setMemberInfo] = useState<MemberInfo | null>(null);
+
+  const getMemberInfo = async () => {
+    try {
+      const token = localStorage.getItem('refreshToken');
+      console.log(token);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/member`, {
+        method: 'GET',
+        headers: {
+          'access-token': token || '',
+          'refresh-token': token || '',
+        },
+      });
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getMemberInfo().then((data) => {
+      setMemberInfo(data);
+    });
+  }, []);
 
   // 실제 data 요청 할 값입니다!
   const data = {
-    count: 200,
-    levelCount: 600,
-    water: -1,
-    sun: 4,
-    soy: 5,
+    count: memberInfo?.attendCount || 0,
+    levelCount: memberInfo?.levelCount || 0,
+    water: memberInfo?.feedbackWater || 0,
+    sun: memberInfo?.feedbackSun || 0,
+    soy: memberInfo?.feedbackManure || 0,
   };
 
   // 등급정하기

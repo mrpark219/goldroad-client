@@ -9,6 +9,7 @@ interface GatherModalProps {
   meeting: MeetingData;
 }
 const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
+  if (!meeting) return null;
   const router = useRouter();
   return (
     <>
