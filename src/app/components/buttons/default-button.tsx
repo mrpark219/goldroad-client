@@ -14,6 +14,7 @@ function DefaultButton({ text, onClick, disabled = false }: DefaultButtonProps) 
     <button
       className={twMerge('w-full h-[50px] rounded-[8px] text-white', disabledStyle)}
       onClick={onClick}
+      disabled={disabled}
     >
       {text}
     </button>

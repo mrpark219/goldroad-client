@@ -1,17 +1,20 @@
 'use client';
 
 import DefaultButton from '@/app/components/buttons/default-button';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import ButtonLayout from '../../components/layout/button-layout';
 import InputLayout from '../../components/layout/input-layout';
+import { UserData } from '../../page';
 import ChoiceLayout from '../choice-layout';
 import ChoiceCard from '../choice-section/choice-card';
 
 interface Props {
   handleNext: () => void;
+  userData: UserData;
+  setUserData: Dispatch<SetStateAction<UserData>>;
 }
 
-function Survey06({ handleNext }: Props) {
+function Survey06({ handleNext, setUserData }: Props) {
   const [selected, setSelected] = useState<number[]>([]);
   const choices = [
     '귀농',
@@ -25,7 +28,12 @@ function Survey06({ handleNext }: Props) {
   ];
   const handleSelect = (index: number) => {
     setSelected((prev) => [...prev, index]);
+    setUserData((prev) => ({
+      ...prev,
+      interest: prev.interest ? prev.interest + ',' + choices[index] : choices[index],
+    }));
   };
+
   return (
     <ChoiceLayout title="제주 이주 시 주요 관심사를 선택해주세요" subTitle="최소 3개 선택해주세요">
       <InputLayout>

@@ -13,14 +13,14 @@ interface IconProps {
   color?: string;
 }
 
-const Icon = ({ name, width, height, color = 'currentColor', ...props }: IconProps) => {
+const Icon = ({ name, width, height, color, ...props }: IconProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const svgElement = async () => {
       const svg = await import(`./${name}.svg`);
       if (!svgRef.current) return;
-      svgRef.current.innerHTML = replaceColor(svg.default, color);
+      svgRef.current.innerHTML = color ? replaceColor(svg.default, color) : svg.default;
     };
     svgElement();
   }, [name, color]);

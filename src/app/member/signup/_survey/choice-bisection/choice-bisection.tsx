@@ -1,12 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { UserData } from '../../page';
 import BisectionCard from './bisection-card';
 
-function ChoiceBisection() {
-  const [isMan, setIsMan] = useState(true);
+interface Props {
+  userData: UserData;
+  setUserData: Dispatch<SetStateAction<UserData>>;
+}
+function ChoiceBisection({ userData, setUserData }: Props) {
+  const [isMan, setIsMan] = useState(userData.genderType === '남성');
   const handleClick = (text: string) => {
     setIsMan(text === '남성');
+    setUserData((prev) => ({ ...prev, genderType: text }));
   };
   return (
     <div className="flex justify-center items-center w-full gap-6">
