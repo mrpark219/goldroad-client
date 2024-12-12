@@ -23,7 +23,7 @@ function BisectionCard({ iconName, text, isChoosed, onClick }: BisectionCardProp
         )}
       >
         <Icon name={iconName} width={52} height={52} color={isChoosed ? '#FFFFFF' : '#ACACAC'} />
-        <div>{text}</div>
+        <div>{text}이예요</div>
       </div>
     </button>
   );

@@ -1,3 +1,4 @@
+import ButtonLayout from './components/buttons/button-layout';
 import ChoiceBisection from './components/choice-bisection/choice-bisection';
 import ChoiceLayout from './components/choice-layout';
 import ChoiceSection from './components/choice-section/choice-section';
@@ -25,6 +26,7 @@ export default async function Home() {
           <ChoiceSection />
           <div className="flex w-full items-start">hi</div>
         </ChoiceLayout>
+        <ButtonLayout />
       </div>
     </div>
   );
