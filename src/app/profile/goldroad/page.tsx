@@ -3,9 +3,116 @@ import useToggle from '@/lib/hooks/useToggle';
 import Image from 'next/image';
 import Link from 'next/link';
 import Icon from '../../../../public/icons/icon';
+import { useEffect, useState } from 'react';
 
 function GoldroadPage() {
   const [isOpenGrade, toggleOpenGrade] = useToggle(true);
+
+  // 실제 data 요청 할 값입니다!
+  const data = {
+    count: 200,
+    levelCount: 600,
+    water: -1,
+    sun: 4,
+    soy: 5,
+  };
+
+  // 등급정하기
+  const [gradeInfo, setGradeInfo] = useState<{
+    gradeName: string;
+    gradeImagePath: string;
+    gradeProgress: string;
+    gradeProgressOrange: string;
+  }>({
+    gradeName: '',
+    gradeImagePath: '',
+    gradeProgress: '',
+    gradeProgressOrange: '',
+  });
+
+  const updateGrade = () => {
+    switch (true) {
+      case data.count >= 200 && data.levelCount >= 600:
+        setGradeInfo({
+          gradeName: '황금향',
+          gradeImagePath: '/icons/grade9.svg',
+          gradeProgress: '100',
+          gradeProgressOrange: '94',
+        });
+        break;
+      case data.count >= 100 && data.levelCount >= 300:
+        setGradeInfo({
+          gradeName: '나무',
+          gradeImagePath: '/icons/grade8.svg',
+          gradeProgress: '80',
+          gradeProgressOrange: '74',
+        });
+        break;
+      case data.count >= 80 && data.levelCount >= 250:
+        setGradeInfo({
+          gradeName: '열매',
+          gradeImagePath: '/icons/grade7.svg',
+          gradeProgress: '70',
+          gradeProgressOrange: '65',
+        });
+        break;
+      case data.count >= 50 && data.levelCount >= 150:
+        setGradeInfo({
+          gradeName: '꽃',
+          gradeImagePath: '/icons/grade6.svg',
+          gradeProgress: '60',
+          gradeProgressOrange: '54',
+        });
+        break;
+      case data.count >= 30 && data.levelCount >= 100:
+        setGradeInfo({
+          gradeName: '가지',
+          gradeImagePath: '/icons/grade5.svg',
+          gradeProgress: '50',
+          gradeProgressOrange: '45',
+        });
+        break;
+      case data.count >= 20 && data.levelCount >= 50:
+        setGradeInfo({
+          gradeName: '잎새',
+          gradeImagePath: '/icons/grade4.svg',
+          gradeProgress: '40',
+          gradeProgressOrange: '35',
+        });
+        break;
+      case data.count >= 10 && data.levelCount >= 20:
+        setGradeInfo({
+          gradeName: '묘목',
+          gradeImagePath: '/icons/grade3.svg',
+          gradeProgress: '30',
+          gradeProgressOrange: '24',
+        });
+        break;
+      case data.count >= 5 && data.levelCount >= 10:
+        setGradeInfo({
+          gradeName: '새싹',
+          gradeImagePath: '/icons/grade2.svg',
+          gradeProgress: '20',
+          gradeProgressOrange: '13',
+        });
+        break;
+      default:
+        setGradeInfo({
+          gradeName: '씨앗',
+          gradeImagePath: '/icons/grade1.svg',
+          gradeProgress: '10',
+          gradeProgressOrange: '5',
+        });
+    }
+  };
+
+  useEffect(() => {
+    updateGrade();
+  }, []);
+
+  console.log(gradeInfo);
+
+  if (!data) return;
 
   return (
     <div className="mx-[24px]">
@@ -16,18 +123,27 @@ function GoldroadPage() {
       </Link>
       {/* 이미지 */}
       <div className="w-full h-[296px] relative rounded-[16px] bg-gray mb-[28px] overflow-hidden">
-        <Image src="/icons/grade1.svg" alt="황금향이미지" fill objectFit="cover" />
+        <Image src={gradeInfo.gradeImagePath} alt="황금향이미지" fill objectFit="cover" />
       </div>
       {/* progress bar */}
-      <div className="relative mb-[70px]">
+      <div className="relative min-w-full mb-[70px]">
         <progress
-          className="progress progress-primary bg-[#FFF3EC] w-full h-[14px]"
-          value="10"
+          className={`progress bg-[#FFF3EC] w-full h-[14px] ${gradeInfo.gradeProgress === '100' ? 'progress-secondary' : 'progress-primary'}`}
+          value={gradeInfo.gradeProgress}
           max="100"
         ></progress>
-        <div className="top-[50%] translate-y-[-60%] left-[5%] absolute">
-          <Icon name="orange" width={38} height={45} />
-          <p className="absolute bottom-[-50%] text-[18px] font-medium">씨앗</p>
+        <div
+          className={`top-[50%] translate-y-[-60%] absolute`}
+          style={{ left: `${gradeInfo.gradeProgressOrange}%` }}
+        >
+          <Icon
+            name={gradeInfo.gradeProgress === '100' ? 'orangegold' : 'orange'}
+            width={38}
+            height={45}
+          />
+          <p className="absolute bottom-[-50%] text-[18px] whitespace-nowrap font-medium">
+            {gradeInfo.gradeName}
+          </p>
         </div>
       </div>
       {/* 피드백 */}
@@ -37,25 +153,49 @@ function GoldroadPage() {
       </p>
       <div className="flex gap-[16px] mb-[38px]">
         <div>
-          <div className="w-[134px] h-[134px] rounded-full bg-[#EEF4FF] mb-[8px] flex justify-center items-center">
+          <div
+            className={`w-[134px] h-[134px] rounded-full mb-[8px] flex justify-center items-center ${data.water > 0 ? 'bg-[#EEF4FF]' : 'bg-[#FFEEEE]'}`}
+          >
             <Icon name="water" width={58} height={58} />
           </div>
-          <p className="text-[18px] font-medium text-[#666666] text-center">물+4</p>
-          <p className="text-[16px] font-medium text-[#3755CF] text-center">활발해요!</p>
+          <p className="text-[18px] font-medium text-[#666666] text-center">
+            물{data.water > 0 ? `+${data.water}` : `${data.water}`}
+          </p>
+          <p
+            className={`text-[16px] font-medium text-center ${data.water > 0 ? 'text-[#3755CF]' : 'text-[#E92626]'}`}
+          >
+            {data.water > 0 ? '활발해요!' : '참여도를 높여요!'}
+          </p>
         </div>
         <div>
-          <div className="w-[134px] h-[134px] rounded-full bg-[#EEF4FF] mb-[8px] flex justify-center items-center">
+          <div
+            className={`w-[134px] h-[134px] rounded-full mb-[8px] flex justify-center items-center ${data.sun > 0 ? 'bg-[#EEF4FF]' : 'bg-[#FFEEEE]'}`}
+          >
             <Icon name="sun" width={58} height={58} />
           </div>
-          <p className="text-[18px] font-medium text-[#666666] text-center">햇빛+4</p>
-          <p className="text-[16px] font-medium text-[#3755CF] text-center">활발해요!</p>
+          <p className="text-[18px] font-medium text-[#666666] text-center">
+            햇빛{data.sun > 0 ? `+${data.sun}` : `${data.sun}`}
+          </p>
+          <p
+            className={`text-[16px] font-medium text-center ${data.sun > 0 ? 'text-[#3755CF]' : 'text-[#E92626]'}`}
+          >
+            {data.sun ? '친절해요!' : '경청해봐요!'}
+          </p>
         </div>
         <div>
-          <div className="w-[134px] h-[134px] rounded-full bg-[#EEF4FF] mb-[8px] flex justify-center items-center">
+          <div
+            className={`w-[134px] h-[134px] rounded-full mb-[8px] flex justify-center items-center ${data.soy > 0 ? 'bg-[#EEF4FF]' : 'bg-[#FFEEEE]'}`}
+          >
             <Icon name="soy" width={58} height={58} />
           </div>
-          <p className="text-[18px] font-medium text-[#666666] text-center">거름+4</p>
-          <p className="text-[16px] font-medium text-[#3755CF] text-center">활발해요!</p>
+          <p className="text-[18px] font-medium text-[#666666] text-center">
+            거름{data.soy > 0 ? `+${data.soy}` : `${data.soy}`}
+          </p>
+          <p
+            className={`text-[16px] font-medium text-center ${data.soy > 0 ? 'text-[#3755CF]' : 'text-[#E92626]'}`}
+          >
+            {data.soy ? '도음이 됐어요!' : '도움을 줘봐요!'}
+          </p>
         </div>
       </div>
       {/* 황금향등급 */}
