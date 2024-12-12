@@ -27,7 +27,18 @@ function Survey06({ handleNext, setUserData }: Props) {
     '커뮤니티',
   ];
   const handleSelect = (index: number) => {
-    setSelected((prev) => [...prev, index]);
+    if (selected.includes(index)) {
+      setSelected(selected.filter((i) => i !== index));
+      setUserData((prev) => ({
+        ...prev,
+        interest: prev.interest
+          .split(',')
+          .filter((i) => i !== choices[index])
+          .join(','),
+      }));
+    } else {
+      setSelected((prev) => [...prev, index]);
+    }
     setUserData((prev) => ({
       ...prev,
       interest: prev.interest ? prev.interest + ',' + choices[index] : choices[index],

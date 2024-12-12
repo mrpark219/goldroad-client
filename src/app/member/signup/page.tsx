@@ -20,7 +20,7 @@ export interface UserData {
 }
 
 const SignUpPage = () => {
-  const [isSuccess] = useState<boolean>(true);
+  const [isSuccess] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
   const [userData, setUserData] = useState<UserData>({
     email: '',
@@ -71,7 +71,9 @@ const SignUpPage = () => {
   }
   return (
     <div className="px-[24px]">
-      <button onClick={() => page > 0 && setPage(page - 1)}>{'<<'}</button>
+      <button onClick={() => page > 0 && setPage(page - 1)}>
+        <Icon name="arrow-back" width={30} height={30} />
+      </button>
       {page === 0 && (
         <Signup handleNext={handleNext} userData={userData} setUserData={setUserData} />
       )}
