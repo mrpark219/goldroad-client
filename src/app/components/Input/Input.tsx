@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from 'react';
 type Props = {
   label: string;
   value: string;
-  setValue: Dispatch<SetStateAction<UserData | UserLoginData>>;
+  setValue: Dispatch<SetStateAction<UserLoginData>> | Dispatch<SetStateAction<UserData>>;
   type: string;
   errorMessage?: string;
 };

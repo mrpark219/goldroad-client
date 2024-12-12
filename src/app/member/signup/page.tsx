@@ -1,7 +1,5 @@
 'use client';
 import DefaultButton from '@/app/components/buttons/default-button';
-import { useRouter } from 'next/navigation';
-
 import { useState } from 'react';
 import Icon from '../../../../public/icons/icon';
 import Signup from './_survey/survey-section/sighup';
@@ -22,9 +20,8 @@ export interface UserData {
 }
 
 const SignUpPage = () => {
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isSuccess] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
-  const router = useRouter();
   const [userData, setUserData] = useState<UserData>({
     email: '',
     password: '',
@@ -46,9 +43,6 @@ const SignUpPage = () => {
           headers: { 'Content-Type': 'application/json' },
         });
         console.log(response.json());
-        if (response.ok) {
-          setIsSuccess(true);
-        }
       } catch (error) {
         console.error(error);
       }
@@ -70,7 +64,7 @@ const SignUpPage = () => {
           </div>
         </InputLayout>
         <ButtonLayout>
-          <DefaultButton text="확인" onClick={() => router.push('/')} />
+          <DefaultButton text="확인" onClick={() => console.log('hi')} />
         </ButtonLayout>
       </div>
     );

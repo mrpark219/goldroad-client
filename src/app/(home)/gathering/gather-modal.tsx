@@ -1,31 +1,40 @@
 'use client';
 import DefaultButton from '@/app/components/buttons/default-button';
 import ButtonLayout from '@/app/member/signup/components/layout/button-layout';
+import { useRouter } from 'next/navigation';
 import Icon from '../../../../public/icons/icon';
+import { MeetingData } from '../components/gather-swiper';
 interface GatherModalProps {
   handleModalClose: () => void;
+  meeting: MeetingData;
 }
-const GatherModal = ({ handleModalClose }: GatherModalProps) => {
+const GatherModal = ({ handleModalClose, meeting }: GatherModalProps) => {
+  const router = useRouter();
   return (
     <>
       <div className="mx-[24px]">
         <p className="mt-[20px] text-[24px] font-bold text-black mb-[8px] flex justify-between">
-          <span className="text-[#0A614D]">어떤모임제목이에요</span>
+          <span className="text-[#0A614D]">{meeting.title}</span>
           <button onClick={handleModalClose}>
             <Icon name="x" width={22} height={22} />
           </button>
         </p>
         <div className="flex flex-wrap gap-[12px] mb-[18px]">
-          <p className="font-semibold text-[#666666] text-[18px]">#제주도</p>
-          <p className="font-semibold text-[#666666] text-[18px]">#서귀포</p>
+          {meeting.keyword.split(',').map((keyword) => (
+            <p className="font-semibold text-[#666666] text-[18px]"># {keyword}</p>
+          ))}
         </div>
         <div className="flex items-center gap-[8px]">
           <Icon name={'calendar'} width={20} height={20} />
-          <p className="text-[#666666] font-medium text-[18px]">2024.12.13 11시 00분</p>
+          <p className="text-[#666666] font-medium text-[18px]">
+            {meeting.createdDate.split('T')[0]}
+          </p>
         </div>
-        <p className="text-[#666666] font-medium text-[18px] mb-[24px]">
-          모임에대한설명이에여모임에대한설명이에여모임에대한설명이에여모임에대한설명이에여
-        </p>
+        <div className="flex items-center gap-[8px]">
+          <Icon name={'link'} width={20} height={20} />
+          <p className="text-[#666666] font-medium text-[18px]">link</p>
+        </div>
+        <p className="text-[#666666] font-medium text-[18px] mb-[24px]">{meeting.summary}</p>
         <div className="flex justify-between w-full items-center">
           <div className="flex items-center gap-[12px]">
             <div className="avatar-group -space-x-2 rtl:space-x-reverse">
@@ -66,7 +75,7 @@ const GatherModal = ({ handleModalClose }: GatherModalProps) => {
       </div>
 
       <ButtonLayout>
-        <DefaultButton text="확인" onClick={() => console.log('a')} />
+        <DefaultButton text="확인" onClick={() => router.push('/')} />
       </ButtonLayout>
     </>
   );

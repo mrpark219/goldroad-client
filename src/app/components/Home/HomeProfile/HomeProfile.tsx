@@ -34,7 +34,7 @@ const HomeProfile = () => {
         className="bg-[#F8F8F8] rounded-full"
       />
       <div>
-        <p className="font-semibold text-[24px] text-black mb-[4px] mr-[4px]">00님</p>
+        <p className="font-semibold text-[24px] text-black mb-[4px] mr-[4px]">지연님</p>
         <Link href="/profile/goldroad">
           <p className="font-semibold text-[20px] text-black flex items-center">
             내 황금향 <Icon name="arrow-right" width={16} height={16} />
